@@ -1,0 +1,101 @@
+{
+  "measured_on": "2026-04-24",
+  "currency": "THB",
+  "note": "Re-probe every 90 days. 'Floor' = lowest credible price seen at a platform with seller accountability (warranty, return policy, or cycle-count disclosure).",
+  "platforms": {
+    "fb_marketplace": {
+      "url": "https://www.facebook.com/marketplace/bangkok/",
+      "trust": "low",
+      "strength": "widest selection, lowest prices",
+      "weakness": "no buyer protection, no warranty, no spec verification"
+    },
+    "kaidee": {
+      "url": "https://www.kaidee.com",
+      "trust": "medium",
+      "strength": "many shops offer 15-day shop warranty",
+      "weakness": "individual sellers mixed in, not all offer warranty"
+    },
+    "mac2hand": {
+      "url": "https://www.mac2hand.com",
+      "trust": "high-for-apple",
+      "strength": "Apple-specific, publishes battery cycles + AppleCare status",
+      "weakness": "Apple only; prices reflect certified condition"
+    },
+    "biggo": {
+      "url": "https://biggo.co.th",
+      "trust": "aggregator",
+      "strength": "indexes other platforms, fast sanity check",
+      "weakness": "not a seller itself"
+    },
+    "back_market": {
+      "url": "https://www.backmarket.com",
+      "trust": "high",
+      "strength": "certified refurb, 1-year warranty, 30-day return",
+      "weakness": "USD pricing, shipping from US/EU; mostly newer models"
+    },
+    "phonehip": {
+      "url": "https://www.phonehip.com",
+      "trust": "medium",
+      "strength": "deep Dell/HP catalog",
+      "weakness": "shop warranty varies"
+    },
+    "bsl_computer": {
+      "url": "https://www.bslcomputer.com",
+      "trust": "medium",
+      "strength": "specializes in used ThinkPad/Dell",
+      "weakness": "smaller selection"
+    }
+  },
+  "model_floors_apr_2026": {
+    "dell_latitude_5490_i7_16gb_14in": {
+      "fb_marketplace_typical": [4500, 6000],
+      "kaidee_warranty_floor": 8000,
+      "delta_vs_floor_pct_of_fb_low": -44,
+      "notes": "Popular used model; plenty of supply"
+    },
+    "dell_latitude_3500_i7_16gb_15_6in": {
+      "fb_marketplace_typical": [6000, 7000],
+      "kaidee_warranty_floor": 8000,
+      "notes": "15.6\" screen premium ~฿500 over 14\" siblings"
+    },
+    "dell_latitude_7420_gen11_i5_16gb_14in": {
+      "fb_marketplace_typical": [7200, 8500],
+      "kaidee_warranty_floor": 12000,
+      "new_retail_shopee_lazada": 18000,
+      "notes": "Premium ultralight, held value better than older Latitudes"
+    },
+    "dell_inspiron_5310_i5_11320h_16gb": {
+      "fb_marketplace_typical": [6500, 7500],
+      "back_market_refurb_usd": [400, 500],
+      "back_market_refurb_thb_approx": [14000, 17500],
+      "notes": "Newer model; Thai supply thin, Back Market shows what 'certified' costs"
+    },
+    "macbook_air_m1_2020_8gb_256gb": {
+      "mac2hand_verified_floor": 12000,
+      "mac2hand_verified_ceiling": 15500,
+      "fb_marketplace_credible_range": [9000, 11000],
+      "red_flag_below": 9000,
+      "notes": "Anything under ฿9k is activation-locked / battery-dead / stolen — verify serial on checkcoverage.apple.com before paying"
+    },
+    "thinkpad_x13_g1_ryzen_5_pro_4650u": {
+      "fb_marketplace_typical": [5000, 6500],
+      "biggo_floor_i5_gen10_8gb": 7990,
+      "notes": "Ryzen 5 Pro 4650U ≈ i5-1135G7 in benchmarks, usually cheaper because AMD"
+    },
+    "thinkpad_t490_i7_16gb": {
+      "fb_marketplace_typical": [7000, 8500],
+      "kaidee_warranty_floor": 10000,
+      "notes": "T-series premium — holds price"
+    },
+    "hp_15s_i5_gen10_consumer": {
+      "fb_marketplace_typical": [5000, 6000],
+      "notes": "Consumer-grade, faster price decay than business-class"
+    }
+  },
+  "fraud_detection_heuristic": {
+    "delta_0_to_minus_15_pct": "normal private-seller pricing — buy with inspection",
+    "delta_minus_15_to_40_pct": "good deal, motivated seller — verify spec, meet in person",
+    "delta_minus_40_to_60_pct": "red flag territory — demand serial, live demo, payment at pickup only",
+    "delta_greater_than_minus_60_pct": "high fraud probability — assume activation-locked / swollen battery / nonfunctional"
+  }
+}
