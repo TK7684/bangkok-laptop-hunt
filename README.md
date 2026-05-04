@@ -8,6 +8,14 @@ Born 2026-04-24 when [Tabby](https://github.com/TK7684) needed a thin-client lap
 
 | File | What it is |
 |---|---|
+| [`src/index.js`](src/index.js) | Main entry point — runs all scrapers and produces combined shortlist |
+| [`src/scrapers/facebook.js`](src/scrapers/facebook.js) | Facebook Marketplace headless scraper |
+| [`src/scrapers/kaidee.js`](src/scrapers/kaidee.js) | Kaidee (Thai classifieds) headless scraper |
+| [`src/lib/scraper-utils.js`](src/lib/scraper-utils.js) | Shared parsing, filtering, and output utilities |
+| [`src/lib/browser.js`](src/lib/browser.js) | Playwright browser lifecycle management |
+| [`src/config.js`](src/config.js) | All tunable parameters (budget, queries, filters, browser settings) |
+| [`Dockerfile`](Dockerfile) | Container build with headless Chromium + Playwright |
+| [`railway.json`](railway.json) | Railway deployment config (daily cron at 06:00 UTC) |
 | [`docs/playwright-recipe.md`](docs/playwright-recipe.md) | The Playwright-MCP recipe for scraping Facebook Marketplace (with a ≠0 2FA escape hatch) + the 100%-reliable save-to-collection batch loop |
 | [`docs/thai-platform-floors.md`](docs/thai-platform-floors.md) | Price-floor reference for Thai 2nd-hand laptop platforms (Kaidee, Mac2Hand, BigGo, Back Market, etc.) with a fraud-detection heuristic |
 | [`docs/verification-checklist.md`](docs/verification-checklist.md) | What to ask sellers + what to check on serials before paying (Thai + English) |
@@ -27,6 +35,49 @@ A **thin-client laptop** that:
 - Doesn't cost more than ฿7,000–8,000
 
 If that matches you, this toolkit will save you ~3 hours of manual scrolling.
+
+## Quick start
+
+```bash
+# Install dependencies
+npm install
+
+# Install Playwright Chromium
+npx playwright install chromium
+
+# Run all scrapers (Facebook + Kaidee)
+node src/index.js --all
+
+# Run a single platform
+node src/index.js --fb
+node src/index.js --kaidee
+
+# Run tests
+npm test
+```
+
+### Environment variables
+
+| Variable | Required | Description |
+|---|---|---|
+| `FB_SESSION_FILE` | No | Path to Playwright storage state JSON for Facebook auth |
+| `SCRAPE_TIMEOUT` | No | Max seconds per scraper (default: 300) |
+
+### Docker
+
+```bash
+# Build
+docker build -t bangkok-laptop-hunt .
+
+# Run (output saved to ./data)
+docker run -v $(pwd)/data:/app/data bangkok-laptop-hunt
+```
+
+### Railway deployment
+
+The [`railway.json`](railway.json) configures a **daily cron at 06:00 UTC** (13:00 Bangkok time). Connect this repo to Railway and it will auto-deploy from the Dockerfile.
+
+Set `FB_SESSION_FILE` as a Railway environment variable if you need authenticated Facebook scraping.
 
 ## TL;DR recommendation (as of Apr 2026)
 

@@ -5,3 +5,8 @@ node_modules/
 .env.local
 # local Playwright snapshots
 .playwright-mcp/
+# Playwright browser cache
+.ms-playwright/
+# Session files (contain auth cookies)
+*.session.json
+fb-session.json

@@ -1,0 +1,23 @@
+{
+  "name": "bangkok-laptop-hunt",
+  "version": "1.0.0",
+  "description": "Playwright scraper for Facebook Marketplace + Thai platforms (Kaidee, Mac2Hand) for Bangkok laptops under 8000 THB",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "scrape": "node src/index.js",
+    "scrape:fb": "node src/scrapers/facebook.js",
+    "scrape:kaidee": "node src/scrapers/kaidee.js",
+    "scrape:all": "node src/index.js --all",
+    "test": "node --test test/",
+    "start": "node src/index.js"
+  },
+  "keywords": ["playwright", "scraper", "facebook-marketplace", "kaidee", "bangkok", "laptop"],
+  "license": "MIT",
+  "dependencies": {
+    "playwright": "^1.52.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0"
+  }
+}
