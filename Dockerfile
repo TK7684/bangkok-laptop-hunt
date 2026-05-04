@@ -50,13 +50,13 @@ COPY data/ ./data/
 # Install Playwright browsers (Chromium only — we don't need Firefox/WebKit)
 RUN npx playwright install chromium
 
-# Output directory
-RUN mkdir -p /app/data
-VOLUME ["/app/data"]
-
-# Run as non-root user
+# Create scraper user and set ownership before VOLUME declaration
 RUN groupadd -r scraper && useradd -r -g scraper -d /app scraper \
     && chown -R scraper:scraper /app
+
+# Output directory
+VOLUME ["/app/data"]
+
 USER scraper
 
 # Default: scrape all platforms
