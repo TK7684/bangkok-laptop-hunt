@@ -1,0 +1,12 @@
+node_modules/
+test/
+data/*.json
+data/*.csv
+.git/
+.gitignore
+.env
+.env.local
+*.log
+.DS_Store
+README.md
+.claude/
