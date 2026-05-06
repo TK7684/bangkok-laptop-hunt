@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "name": "bangkok-laptop-hunt",
+  "builds": [
+    { "src": "api/**/*.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/shortlist", "dest": "/api/shortlist.js" },
+    { "src": "/api/health", "dest": "/api/health.js" },
+    { "src": "/(.*)", "dest": "/api/shortlist.js" }
+  ]
+}

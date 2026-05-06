@@ -10,3 +10,4 @@ node_modules/
 # Session files (contain auth cookies)
 *.session.json
 fb-session.json
+.vercel
